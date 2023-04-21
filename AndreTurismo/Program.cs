@@ -150,6 +150,7 @@ internal class Program
        
         List<PackageModel> pacotes = new List<PackageModel>();
 
+
         pacotes = new PackageService().ListarTodasPacotes();
 
         foreach(var pacote in pacotes)
