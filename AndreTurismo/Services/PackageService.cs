@@ -1,16 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AndreTurismo.Models;
+using Dapper;
 
 namespace AndreTurismo.Services
 {
     
     public class PackageService
     {
+
+        public string Conn { get; set; }
+
+        public PackageService()
+        {
+            Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
+
+
+        }
+
+        public PackageModel InserirPacote(PackageModel pacote)
+        {
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                StringBuilder montagem_query = new StringBuilder();
+                montagem_query.Append(PackageModel.INSERIR_PACOTE);
+                montagem_query.Replace("@Hotel_Pacote", new HotelService().InserirHotel(pacote.Hotel_Pacote).Id.ToString());
+                montagem_query.Replace("@Passagem_Pacote", new TicketService().InserirPassagem(pacote.Passagem_Pacote).Id.ToString());
+                montagem_query.Replace("@Cliente_Pacote", new ClientService().InserirCliente(pacote.Cliente_Pacote).Id.ToString());
+
+                pacote.Id = (int)db.ExecuteScalar(montagem_query.ToString(), pacote);
+            }
+
+            return pacote;
+        }
+        /*
         readonly string strConn = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\USERS\ADM\DOCUMENTS\ANDRETURISMO.MDF";
         readonly SqlConnection conn;
 
@@ -106,7 +136,7 @@ namespace AndreTurismo.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-        */
+        
 
         public List<PackageModel> ListarTodasPacotes()
         {
@@ -161,6 +191,7 @@ namespace AndreTurismo.Services
                 conn.Close();
             }
         }
+        */
     }
     
 }

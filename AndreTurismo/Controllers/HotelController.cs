@@ -8,6 +8,7 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
+    /*
     public class HotelController
     {
         public HotelModel InsertHotel()
@@ -30,4 +31,5 @@ namespace AndreTurismo.Controllers
             return hotel;
         }
     }
+    */
 }

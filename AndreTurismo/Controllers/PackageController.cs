@@ -8,8 +8,10 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
+    /*
     public class PackageController
     {
+        
         public PackageModel InserirPacote()
         {
             PackageModel pacote = new PackageModel();
@@ -26,13 +28,13 @@ namespace AndreTurismo.Controllers
             pacote.Passagem_Pacote= passagem_model; 
             pacote.Cliente_Pacote = passagem_model.Cliente;
 
-            /*
+            
             Console.WriteLine();
             Console.WriteLine("#####DADOS DO CLIENTE#####");
             ClientModel cliente_model = new ClientModel();
             cliente_model = new ClientController().InsertClient();
             pacote.Cliente_Pacote = cliente_model;
-            */
+            
 
             Console.WriteLine();
             Console.WriteLine("##### DIGITE O VALOR DO PACOTE #####");
@@ -44,5 +46,5 @@ namespace AndreTurismo.Controllers
 
             return pacote;
         }
-    }
+    */
 }

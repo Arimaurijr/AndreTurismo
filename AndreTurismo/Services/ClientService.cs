@@ -1,26 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using AndreTurismo.Models;
+using Dapper;
 
 namespace AndreTurismo.Services
 {
 
     public class ClientService
     {
-        readonly string strConn = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\USERS\ADM\DOCUMENTS\ANDRETURISMO.MDF";
-        readonly SqlConnection conn;
+        public string Conn { get; set; }
 
         public ClientService()
         {
-            conn = new SqlConnection(strConn);
-            
+            Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
+
+
         }
 
+        public ClientModel InserirCliente(ClientModel cliente)
+        {
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                var query = ClientModel.INSERIR_CLIENTE.Replace("@Endereco", new AddressService().InserirEndereco(cliente.Endereco).Id.ToString());
+                cliente.Id = (int)db.ExecuteScalar(query, cliente);
+            }
+
+            return cliente;
+        }
+        /*
         public int InserirCliente(ClientModel cliente)
         {
             conn.Open();
@@ -150,4 +165,8 @@ namespace AndreTurismo.Services
             return status;
         }
     }
+    */
+
+    }
+
 }

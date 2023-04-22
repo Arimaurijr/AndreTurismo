@@ -8,6 +8,11 @@ namespace AndreTurismo.Models
 {
     public class ClientModel
     {
+        public readonly static string INSERIR_CLIENTE =
+            "insert into client(nome_cliente, telefone, endereco_cliente, data_cadastro_cliente)" +
+                           "values(@Nome,     @Telefone, @Endereco,       @Data_Cadastro_Cliente);" + "select cast(scope_identity() as int);";
+
+
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Telefone { get; set; }

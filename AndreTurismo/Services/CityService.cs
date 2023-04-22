@@ -1,80 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AndreTurismo.Models;
 using Microsoft.Win32.SafeHandles;
+using Dapper;
+using System.Data;
 
 namespace AndreTurismo.Services
 {
     public class CityService
     {
-        readonly string strConn = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\USERS\ADM\DOCUMENTS\ANDRETURISMO.MDF";
-        readonly SqlConnection conn;
+        
+        public string Conn { get; set; }
 
         public CityService()
         {
-            conn = new SqlConnection(strConn);
-            //conn.Open();
+            Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
+
+      
+        }
+
+        public CityModel InserirCidade(CityModel city)
+        {
+
+            using(var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                city.Id = (int)db.ExecuteScalar(CityModel.INSERT, city);
+            }
+
+            return city;  
+        }
+        public CityModel RetornarCidade(int id)
+        {
+               
+           
+                StringBuilder sb = new StringBuilder();
+                sb.Append("select id_cidade, descricao, data_cadastro_cidade from city where id_cidade = " + id);
+
+                CityModel cidade = new CityModel();
+                var db = new SqlConnection(Conn);
+                db.Open();
+
+                SqlCommand commandSelect = new(sb.ToString(), db);
+                IDataReader dr = commandSelect.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cidade.Id = (int)dr["id_cidade"];
+                    cidade.Descricao = (string)dr["descricao"];
+                    cidade.Data_Cadastro_Cidade = (DateTime)dr["data_cadastro_cidade"];
+                }
+
+                
+                dr.Close();
+                db.Close();
+                return cidade;
         }
         /*
-        public bool InserirCidade(CityModel city)
+         public bool Insert(Book book)
         {
-            bool status = false;
-            try
+            var status = false;
+            using (var db = new SqlConnection(Conn))
             {
-                string strInsert = "insert into city(descricao, data_cadastro_cidade) values (@descricao, @data_cadastro_cidade)";
-                SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-                commandInsert.Parameters.Add(new SqlParameter("@descricao", city.Descricao));
-                commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_cidade", city.Data_Cadastro_Cidade));
-
-                commandInsert.ExecuteNonQuery();
+                db.Open();
+                db.Execute(Book.INSERT, book);
                 status = true;
-
             }
-            catch (Exception e)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-
             return status;
         }
-        */
-        public int InserirCidade(CityModel city)
-        {
-            conn.Open();
-
-            try
-            {
-                string strInsert = "insert into city(descricao, data_cadastro_cidade) values (@descricao, @data_cadastro_cidade)" + "select cast(scope_identity() as int)";
-                SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-                commandInsert.Parameters.Add(new SqlParameter("@descricao", city.Descricao));
-                commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_cidade", city.Data_Cadastro_Cidade));
-
-                return (int)commandInsert.ExecuteScalar();
-
-
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            //return 0;
-        }
+         
         public List<CityModel> SelecionarTodasCidades()
         {
             List<CityModel> cidades = new();
@@ -119,7 +118,7 @@ namespace AndreTurismo.Services
             }
             finally
             {
-                conn.Close();
+                //conn.Close();
             }
 
 
@@ -183,6 +182,8 @@ namespace AndreTurismo.Services
             catch(Exception e)
             { throw; }
             finally { conn.Close(); }   
-        }  
+        } 
+        
+        */
     }
 }

@@ -8,6 +8,12 @@ namespace AndreTurismo.Models
 {
     public class TicketModel
     {
+        public readonly static string INSERIR_PASSAGEM =
+        "insert into passagem" +
+        "(endereco_origem, endereco_destino, cliente_passagem, data_cadastro_passagem, valor_passagem)" +
+        "values(@Origem,    @Destino,            @Cliente,        @Data,                  @Valor_Passagem)" + "select cast(scope_identity() as int);";
+
+
         public int Id { get; set; } 
         public AddressModel Origem { get; set; }
         public AddressModel Destino { get; set; }

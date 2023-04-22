@@ -8,6 +8,7 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
+    /*
     public class TicketController
     {
         public TicketModel InsertPassagem()
@@ -36,4 +37,5 @@ namespace AndreTurismo.Controllers
             return passagem;
         }
     }
+    */
 }

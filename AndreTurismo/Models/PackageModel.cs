@@ -8,6 +8,11 @@ namespace AndreTurismo.Models
 {
     public class PackageModel
     {
+        public readonly static string INSERIR_PACOTE =
+        "insert into package" +
+        "(      hotel_pacote,  passagem_pacote,  data_cadastro_pacote,  valor_pacote,  cliente_pacote)" +
+        "values(@Hotel_Pacote, @Passagem_Pacote, @Data_Cadastro_Pacote, @Valor_Pacote, @Cliente_Pacote);" + "select cast(scope_identity() as int);";
+
         public int Id { get; set; }
         public HotelModel Hotel_Pacote { get; set; }
         public TicketModel Passagem_Pacote { get; set; }

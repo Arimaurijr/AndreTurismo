@@ -31,7 +31,7 @@ namespace AndreTurismo.Controllers
             city.Descricao = Console.ReadLine();
             city.Data_Cadastro_Cidade = DateTime.Now;
 
-            city.Id =  new CityService().InserirCidade(city);
+            //city.Id =  new CityService().InserirCidade(city);
 
             AddressModel endereco = new AddressModel();  
             endereco.Cidade = city;
@@ -70,7 +70,7 @@ namespace AndreTurismo.Controllers
             }
             */
 
-            endereco.Id  = new AddressService().InserirEndereco(endereco);
+            //endereco.Id  = new AddressService().InserirEndereco(endereco);
             
             return endereco;
 

@@ -9,6 +9,7 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
+    /*
     public class ClientController
     {
         public ClientModel InsertClient()
@@ -33,4 +34,5 @@ namespace AndreTurismo.Controllers
         }
         
     }
+    */
 }

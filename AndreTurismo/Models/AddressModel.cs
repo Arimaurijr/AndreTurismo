@@ -8,6 +8,11 @@ namespace AndreTurismo.Models
 {
     public class AddressModel
     {
+        public readonly static string INSERIR_ENDERECO = 
+            "insert into address" + 
+            "(logradouro,numero,bairro,cep,complemento,data_cadastro_endereco,id_cidade_endereco)" +
+     "values(@Logradouro,@Numero,@Bairro,@CEP,@Complemento,@Data_Cadastro_Endereco,@Cidade)" + "select cast(scope_identity() as int);";
+
         public int Id { get; set; }
         public string Logradouro { get; set; }
         public int Numero { get; set; }

@@ -1,15 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AndreTurismo.Models;
+using Dapper;
 
 namespace AndreTurismo.Services
-{ 
+{
+
     public class HotelService
     {
+        public string Conn { get; set; }
+
+        public HotelService()
+        {
+            Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
+
+
+        }
+
+        public HotelModel InserirHotel(HotelModel hotel)
+        {
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                var query = HotelModel.INSERIR_HOTEL.Replace("@Endereco", new AddressService().InserirEndereco(hotel.Endereco).Id.ToString());
+                hotel.Id = (int)db.ExecuteScalar(query, hotel);
+            }
+
+            return hotel;
+        }
+        /*
         readonly string strConn = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\USERS\ADM\DOCUMENTS\ANDRETURISMO.MDF";
         readonly SqlConnection conn;
 
@@ -69,7 +94,7 @@ namespace AndreTurismo.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-        */
+        
 
         public HotelModel RetornarHotel(int id_hotel)
         {
@@ -177,5 +202,6 @@ namespace AndreTurismo.Services
         }
         
     }
-   
+   */
+    }
 }

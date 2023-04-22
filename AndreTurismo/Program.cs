@@ -147,17 +147,72 @@ internal class Program
 
         //Console.WriteLine(new TicketService().RetornarPassagem(1));
 
-       
-        List<PackageModel> pacotes = new List<PackageModel>();
+        /*
+         List<PackageModel> pacotes = new List<PackageModel>();
 
 
-        pacotes = new PackageService().ListarTodasPacotes();
+         pacotes = new PackageService().ListarTodasPacotes();
 
-        foreach(var pacote in pacotes)
-        {
-            Console.WriteLine(pacote);
-            Console.WriteLine("\n");
-        }
-        
+         foreach(var pacote in pacotes)
+         {
+             Console.WriteLine(pacote);
+             Console.WriteLine("\n");
+         }
+        */
+        /*
+         CityModel cidade = new CityModel();
+         cidade.Descricao = "Goiânia";
+         cidade.Data_Cadastro_Cidade = DateTime.Now;
+
+         new CityService().InserirCidade(cidade);
+
+         AddressModel endereco = new AddressModel();
+         endereco.Cidade = cidade;
+         endereco.CEP = "12345678";
+         endereco.Logradouro = "Rua Dapper";
+         endereco.Numero = 123;
+         endereco.Bairro = "Bairro Dapper";
+         endereco.Complemento = "Complemento Dapper";
+         endereco.Data_Cadastro_Endereco = DateTime.Now; 
+
+         new AddressService().InserirEndereco(endereco);
+
+         ClientModel cliente = new ClientModel();
+         cliente.Nome = "Guilherme";
+         cliente.Telefone = "(16)99999999";
+         cliente.Data_Cadastro_Cliente = DateTime.Now;
+         cliente.Endereco = endereco;
+
+         new ClientService().InserirCliente(cliente);
+
+         HotelModel hotel = new HotelModel();
+         hotel.Nome = "Hotel 10 estrelas";
+         hotel.Data_Cadastro_Hotel = DateTime.Now;
+         hotel.Valor_Hotel = 200;
+         hotel.Endereco = endereco;
+
+         new HotelService().InserirHotel(hotel);
+
+         TicketModel passagem = new TicketModel();
+         passagem.Origem = endereco;
+         passagem.Destino = endereco;
+         passagem.Data = DateTime.Now;
+         passagem.Cliente = cliente;
+         passagem.Valor_Passagem = 100.0M;
+
+         new TicketService().InserirPassagem(passagem);  
+
+         PackageModel pacote = new PackageModel();
+         pacote.Data_Cadastro_Pacote = DateTime.Now;
+         pacote.Cliente_Pacote = cliente;
+         pacote.Valor_Pacote = 100.0M;
+         pacote.Hotel_Pacote = hotel;
+         pacote.Passagem_Pacote = passagem;
+
+         new PackageService().InserirPacote(pacote);
+        */
+        //Console.WriteLine(new CityService().RetornarCidade(1));
+
+        Console.WriteLine(new AddressService().RetornarEndereco(1));
     }
 }
