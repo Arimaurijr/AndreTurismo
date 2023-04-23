@@ -21,11 +21,12 @@ namespace AndreTurismo.Models
 
         public override string ToString()
         {
-            string hotel = "ID: " + this.Id +
+            string hotel = "\n##### HOTEL #####"+
+                            "\nID: " + this.Id +
                             "\nNome: " + this.Nome +
-                            "\nEndereço: " + this.Endereco +
-                            "\nData de cadastro: " + this.Data_Cadastro_Hotel +
-                            "\nValor: " + this.Valor_Hotel;
+                            "\nData de cadastro do hotel: " + this.Data_Cadastro_Hotel +
+                            "\nValor: " + this.Valor_Hotel +
+                            "\n" + this.Endereco;
             return hotel;
         }
     }

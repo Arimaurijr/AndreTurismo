@@ -8,28 +8,34 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
-    /*
     public class HotelController
     {
-        public HotelModel InsertHotel()
+        public HotelModel InsertHotel(HotelModel hotel)
         {
-            HotelModel hotel = new HotelModel();
-            
-            Console.WriteLine("Digite o nome do hotel");
-            hotel.Nome = Console.ReadLine();
-
-            Console.WriteLine("Digite o valor da diária");
-            hotel.Valor_Hotel = decimal.Parse(Console.ReadLine());
-
-            Console.WriteLine("Digite o endereço do hotel");
-            hotel.Endereco = new AddressController().Insert();
-
-            hotel.Data_Cadastro_Hotel = DateTime.Now;
-
-            hotel.Id = new HotelService().InserirHotel(hotel);
+            try
+            {
+                hotel = new HotelService().InserirHotel(hotel);
+            }
+            catch 
+            {
+                Console.WriteLine("Não foi possível inserir o hotel");
+            }
+            return hotel;
+        }
+        public HotelModel RetornarHotelPorId(int id_hotel) 
+        {
+            HotelModel hotel = new HotelModel();    
+            try
+            {
+                hotel = new HotelService().RetornarHotel(id_hotel); 
+            }
+            catch 
+            {
+                Console.WriteLine("Não foi possível retornar nenhum hotel");
+            }
 
             return hotel;
         }
     }
-    */
+    
 }

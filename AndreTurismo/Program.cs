@@ -221,6 +221,7 @@ internal class Program
 
         //Console.WriteLine(new TicketService().RetornarPassagem(1));
 
+        /*
         List<PackageModel> pacotes = new List<PackageModel>();
 
         pacotes = new PackageService().ListarTodasPacotes();
@@ -229,6 +230,159 @@ internal class Program
         {
             Console.WriteLine(pacote);
             Console.WriteLine();
+        }*/
+
+
+
+        /******************************************************************/
+
+        // INSERÇÃO E BUSCA DE CIDADE 
+
+        /*
+        CityModel cidade = new CityModel();
+        cidade.Descricao = "Ribeirão Bonito";
+        cidade.Data_Cadastro_Cidade = DateTime.Now; 
+
+        bool verifica = new CityController().InsertCidade(cidade);
+
+        if(verifica) 
+        {
+            Console.WriteLine("Cidade inserida com sucesso");
         }
+        else
+        {
+            Console.WriteLine("Não possível inserir a cidade");
+        }
+
+        
+        CityModel cidade = new CityModel();
+        cidade = new CityController().RetornarCidadePorID(1);
+
+        Console.WriteLine(cidade);  
+        */
+
+        //INSERÇÃO E BUSCA DE ENDEREÇO
+
+        /*
+        AddressModel endereco = new AddressModel();
+        endereco.Logradouro = "Logradouro teste controller";
+        endereco.Numero = 1;
+        endereco.Bairro = "Bairro teste controller";
+        endereco.CEP = "123456789";
+        endereco.Complemento = "Próximo ao service";
+
+        CityModel cidade = new CityModel();
+        cidade.Descricao = "Cidade teste controller";
+        cidade.Data_Cadastro_Cidade = DateTime.Now; 
+
+        endereco.Cidade = cidade;
+        endereco.Data_Cadastro_Endereco = DateTime.Now; 
+
+        endereco = new AddressController().InsertEndereco(endereco);
+        
+        if(endereco.Id != 0) 
+        {
+            Console.WriteLine("Endereço inserido com sucesso !");
+        }
+        else
+        {
+            Console.WriteLine("Não possível inserir o endereco");
+        }
+        */
+
+        AddressModel endereco = new AddressModel();
+        endereco.Logradouro = "Logradouro teste controller 3";
+        endereco.Numero = 1;
+        endereco.Bairro = "Bairro teste controller 3";
+        endereco.CEP = "12345678";
+        endereco.Complemento = "Próximo ao service 3";
+
+        CityModel cidade = new CityModel();
+        cidade.Descricao = "Cidade teste controller 3";
+        cidade.Data_Cadastro_Cidade = DateTime.Now;
+
+        endereco.Cidade = cidade;
+        endereco.Data_Cadastro_Endereco = DateTime.Now;
+
+        //endereco = new AddressService().InserirEndereco(endereco);
+
+        endereco = new AddressController().InsertEndereco(endereco);    
+
+        Console.WriteLine(endereco.Id);
+
+        Console.WriteLine("BUSCA POR ENDEREÇO");
+        endereco = new AddressController().RetornarEnderecoPorID(1);
+        Console.WriteLine(endereco);
+
+        ClientModel cliente = new ClientModel();
+        cliente.Telefone = "123456789";
+        cliente.Nome = "Pedro";
+        cliente.Data_Cadastro_Cliente = DateTime.Now;
+        cliente.Endereco = endereco;
+
+        cliente = new ClientController().InsertClient(cliente);
+        
+        Console.WriteLine("ID do cliente: " + cliente.Id);
+
+        Console.WriteLine();    
+        Console.WriteLine("Retorno do cliente");
+        Console.WriteLine();
+        cliente = new ClientController().RetornarClientePorID(2);
+        Console.WriteLine(cliente);
+
+        HotelModel hotel = new HotelModel();
+        hotel.Nome = "Hotel 20 estrelas";
+        hotel.Valor_Hotel = 200.0M;
+        hotel.Data_Cadastro_Hotel = DateTime.Now;
+        hotel.Endereco = endereco;
+
+        hotel = new HotelController().InsertHotel(hotel);
+
+        Console.WriteLine();
+        Console.WriteLine("ID HOTEL:" + hotel.Id);
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine("Pesquisa do hotel por ID");
+        hotel = new HotelService().RetornarHotel(1);
+        Console.WriteLine(hotel);   
+       
+
+        TicketModel passagem = new TicketModel();
+        passagem.Origem = endereco;
+        passagem.Destino = endereco;
+        passagem.Cliente = cliente;
+        passagem.Data = DateTime.Now;
+        passagem.Valor_Passagem = 200;
+
+        passagem = new TicketController().InsertPassagem(passagem);
+
+        Console.WriteLine();
+        Console.WriteLine("ID passagem: " + passagem.Id);
+        Console.WriteLine();
+
+        PackageModel pacote = new PackageModel();
+        pacote.Cliente_Pacote = cliente;
+        pacote.Hotel_Pacote = hotel;
+        pacote.Data_Cadastro_Pacote = DateTime.Now;
+        pacote.Passagem_Pacote = passagem;
+        pacote.Valor_Pacote = 100;
+
+        pacote = new PackageController().InsertPacote(pacote);
+        
+        Console.WriteLine();
+        Console.WriteLine("ID do pacote:" + pacote.Id);
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine(pacote);
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("##################");
+        Console.WriteLine("TESTES DO TOSTRING()");
+        //Console.WriteLine(endereco);
+        Console.WriteLine(pacote);
     }
 }

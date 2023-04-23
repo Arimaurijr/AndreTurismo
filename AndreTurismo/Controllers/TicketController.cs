@@ -8,34 +8,28 @@ using AndreTurismo.Services;
 
 namespace AndreTurismo.Controllers
 {
-    /*
     public class TicketController
     {
-        public TicketModel InsertPassagem()
-        {
-            TicketModel passagem = new TicketModel();
+          public TicketModel InsertPassagem(TicketModel passagem)
+          {
+                try
+                {
+                    passagem = new TicketService().InserirPassagem(passagem);
+                }
+                catch 
+                {
+                    Console.WriteLine("Não foi possível inserir a passagem");
+                }
 
-            Console.WriteLine("Digite o endereço de origem:(TicketController_InsertPassagem)");
-            Console.WriteLine();
-            passagem.Origem = new AddressController().Insert();
-
-            Console.WriteLine("Digite o endereço de destino:(TicketController_InsertPassagem)");
-            Console.WriteLine();
-            passagem.Destino = new AddressController().Insert();
-
-            Console.WriteLine("Digite os dados do cliente:(TicketController_InsertPassagem)");
-            Console.WriteLine();
-            passagem.Cliente = new ClientController().InsertClient();
-
-            Console.WriteLine("Digite o valor da passagem:(TicketController_InsertPassagem)");
-            passagem.Valor_Passagem = decimal.Parse(Console.ReadLine());    
-
-            passagem.Data = DateTime.Now;
-
-            passagem.Id = new TicketService().InserirPassagem(passagem);
+                return passagem;
+          }
+          public TicketModel RetornarPassagemPorID(int id_passagem)
+          {
+             TicketModel passagem = new TicketModel();
+             
+              passagem = new TicketService().RetornarPassagem(id_passagem);
 
             return passagem;
-        }
-    }
-    */
+          }
+    }   
 }
