@@ -214,5 +214,21 @@ internal class Program
         //Console.WriteLine(new CityService().RetornarCidade(1));
 
         //Console.WriteLine(new AddressService().RetornarEndereco(1));
+
+        //Console.WriteLine(new ClientService().RetornarCliente(1));
+
+        //Console.WriteLine(new HotelService().RetornarHotel(1));
+
+        //Console.WriteLine(new TicketService().RetornarPassagem(1));
+
+        List<PackageModel> pacotes = new List<PackageModel>();
+
+        pacotes = new PackageService().ListarTodasPacotes();
+        
+        foreach (var pacote in pacotes)
+        {
+            Console.WriteLine(pacote);
+            Console.WriteLine();
+        }
     }
 }
