@@ -54,20 +54,6 @@ namespace AndreTurismo.Services
             SqlCommand commandSelect = new(sb.ToString(), db);
             IDataReader dr = commandSelect.ExecuteReader();
 
-            /*
-            SqlCommand commandSelect = new(sb.ToString(), conn);
-            SqlDataReader dr = commandSelect.ExecuteReader();
-            */
-
-            /*
-            CityModel cidade = new CityModel();
-                var db = new SqlConnection(Conn);
-                db.Open();
-
-                SqlCommand commandSelect = new(sb.ToString(), db);
-                IDataReader dr = commandSelect.ExecuteReader();
-
-            */
             if (dr.Read())
             {
 
@@ -267,7 +253,6 @@ namespace AndreTurismo.Services
 
 
             }
-
             public bool AtualizarEndereco(AddressModel endereco)
             {
                 //conn.Open();

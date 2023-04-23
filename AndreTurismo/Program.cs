@@ -213,6 +213,6 @@ internal class Program
         */
         //Console.WriteLine(new CityService().RetornarCidade(1));
 
-        Console.WriteLine(new AddressService().RetornarEndereco(1));
+        //Console.WriteLine(new AddressService().RetornarEndereco(1));
     }
 }
