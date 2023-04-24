@@ -10,13 +10,18 @@ namespace AndreTurismo.Controllers
 {
     public  class CityController
     {
-        /*
-        public bool Insert(CityModel city)
+        
+        public CityModel Insert(CityModel city)
         {
-            bool status = false;
+            city.Id = new CityService().InserirCidade(city); 
+            
+            return city;
 
-            return new CityService().InserirCidade(city);  
         }
-        */
+        public CityModel RetornarCidadePorID(int id_cidade) 
+        { 
+            return new CityService().RetornarCidade(id_cidade);
+        }
+       
     }
 }
