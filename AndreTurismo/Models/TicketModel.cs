@@ -17,11 +17,11 @@ namespace AndreTurismo.Models
 
         public override string ToString()
         {
-            string passagem = "Origem: " + this.Origem +
-                              "Destino: " + this.Destino +
-                              "Cliente: " + this.Cliente +
-                              "Data: " + this.Data +
-                              "Valor: " + this.Valor_Passagem;
+            string passagem = "ENDERECO ORIGEM: " + this.Origem +
+                             "ENDERECO DESTINO: " + this.Destino +
+                              this.Cliente +
+                             "\nData registro da passagem: " + this.Data +
+                             "\nValor da passagem: " + this.Valor_Passagem;
             return passagem;
         }
     }

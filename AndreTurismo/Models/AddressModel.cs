@@ -19,16 +19,18 @@ namespace AndreTurismo.Models
 
         public override string ToString()
         {
-            string enredeco = "Id: " + this.Id +
+            string enredeco = "\n##### ENDEREÇO #####" +
+                              "\nId: " + this.Id +
                               "\nLogradouro: " + this.Logradouro +
                               "\nNumero: " + this.Numero +
                               "\nBairro: " + this.Bairro +
                               "\nCEP: " + this.CEP +
                               "\nComplemento: " + this.Complemento +
-                              "\nCidade: " + this.Cidade +
-                              "\nData de contratação: " + this.Data_Cadastro_Endereco;
+                              "\nData de Cadastro do endereço: " + this.Data_Cadastro_Endereco +
+                               this.Cidade +
+                              "\n";
 
-            return enredeco;    
+            return enredeco;
         }
 
     }

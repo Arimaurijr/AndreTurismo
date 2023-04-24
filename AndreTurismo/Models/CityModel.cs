@@ -13,10 +13,11 @@ namespace AndreTurismo.Models
         public DateTime Data_Cadastro_Cidade { get; set; } 
         public override string ToString()
         {
-            string cidade = "Id: " + this.Id + 
+            string cidade = "\n##### CIDADE #####" +
+                            "\nId: " + this.Id +
                             "\nDescrição:" + this.Descricao +
-                            "\nData cadastro:" + this.Data_Cadastro_Cidade;
+                            "\nData cadastro da cidade:" + this.Data_Cadastro_Cidade + "\n";
             return cidade;
-;        }
+        }
     }
 }

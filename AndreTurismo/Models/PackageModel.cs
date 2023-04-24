@@ -18,11 +18,11 @@ namespace AndreTurismo.Models
         public override string ToString()
         {
             string pacote = "ID: " + this.Id +
-                            "Hotel: " + this.Hotel_Pacote +
-                            "Passagem: " + this.Passagem_Pacote +
+                             this.Hotel_Pacote +
+                             this.Passagem_Pacote +
+                             this.Cliente_Pacote +
                             "Data de cadastro do pacote: " + this.Data_Cadastro_Pacote +
-                            "Valor do pacote: " + this.Valor_Pacote +
-                            "Cliente: " + this.Cliente_Pacote;
+                            "\nValor do pacote: " + this.Valor_Pacote;
             return pacote;
         }
     }
