@@ -52,66 +52,34 @@ namespace AndreTurismo.Services
 
         }
 
-        /*
-        private int InserirEnderecoOrigem(TicketModel passagem)
+        public bool AtualizarPassagem(TicketModel passagem, string coluna, string valor)
         {
-            string strInsert = "insert into address(logradouro,numero,bairro,cep,complemento,data_cadastro_endereco,id_cidade_endereco)" +
-                  "values (@logradouro,@numero,@bairro,@cep,@complemento,@data_cadastro_endereco,@id_cidade_endereco); select cast(scope_identity() as int)";
+            conn.Open();
 
-            SqlCommand commandInsert = new SqlCommand(strInsert, conn);
+            bool status = false;
+            StringBuilder query = new StringBuilder();
+            query.Append("update passagem set " + coluna + " = " + valor);
+            query.Append("            where id_passagem = " + passagem.Id);
 
-            commandInsert.Parameters.Add(new SqlParameter("@logradouro", passagem.Origem.Logradouro));
-            commandInsert.Parameters.Add(new SqlParameter("@numero", passagem.Origem.Numero));
-            commandInsert.Parameters.Add(new SqlParameter("@bairro", passagem.Origem.Bairro));
-            commandInsert.Parameters.Add(new SqlParameter("@cep", passagem.Origem.CEP));
-            commandInsert.Parameters.Add(new SqlParameter("@complemento", passagem.Origem.Complemento));
-            commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_endereco", passagem.Origem.Data_Cadastro_Endereco));
-            commandInsert.Parameters.Add(new SqlParameter("@id_cidade_endereco", passagem.Origem.Cidade.Id));
+            try
+            {
+                SqlCommand commandUpdate = new(query.ToString(), conn);
 
-            commandInsert.ExecuteNonQuery();
+                commandUpdate.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
 
 
-            return (int)commandInsert.ExecuteScalar();
+            return status;
         }
-        private int InserirEnderecoDestino(TicketModel passagem)
-        {
-            string strInsert = "insert into address(logradouro,numero,bairro,cep,complemento,data_cadastro_endereco,id_cidade_endereco)" +
-                  "values (@logradouro,@numero,@bairro,@cep,@complemento,@data_cadastro_endereco,@id_cidade_endereco); select cast(scope_identity() as int)";
-
-            SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-            commandInsert.Parameters.Add(new SqlParameter("@logradouro", passagem.Destino.Logradouro));
-            commandInsert.Parameters.Add(new SqlParameter("@numero", passagem.Destino.Numero));
-            commandInsert.Parameters.Add(new SqlParameter("@bairro", passagem.Destino.Bairro));
-            commandInsert.Parameters.Add(new SqlParameter("@cep", passagem.Destino.CEP));
-            commandInsert.Parameters.Add(new SqlParameter("@complemento", passagem.Destino.Complemento));
-            commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_endereco", passagem.Destino.Data_Cadastro_Endereco));
-            commandInsert.Parameters.Add(new SqlParameter("@id_cidade_endereco", passagem.Destino.Cidade.Id));
-
-            commandInsert.ExecuteNonQuery();
-
-
-            return (int)commandInsert.ExecuteScalar();
-        }
-        private int InserirCliente(ClientModel cliente)
-        {
-            string strInsert = "insert into client(nome_cliente,telefone,data_cadastro_cliente,endereco)" +
-                  "values (@nome_cliente,@telefone,@data_cadastro_cliente,@endereco); select cast(scope_identity() as int)";
-
-            SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-            commandInsert.Parameters.Add(new SqlParameter("@nome_cliente", cliente.Nome));
-            commandInsert.Parameters.Add(new SqlParameter("@telefone", cliente.Telefone));
-            commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_cliente", cliente.Data_Cadastro_Cliente));
-            commandInsert.Parameters.Add(new SqlParameter("@endereco", cliente.Endereco));
-            
-
-            commandInsert.ExecuteNonQuery();
-
-
-            return (int)commandInsert.ExecuteScalar();
-        }
-        */
 
         public TicketModel RetornarPassagem(int id_passagem)
         {

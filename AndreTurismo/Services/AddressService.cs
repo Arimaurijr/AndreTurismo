@@ -19,47 +19,7 @@ namespace AndreTurismo.Services
             //conn.Open();
         }
 
-        /*
-        public bool InserirEndereco(AddressModel endereco)
-        {
-           
-            //conn.Open();
-            bool status = false;
-
-            try
-            {
-                string strInsert = "insert into address(logradouro,numero,bairro,cep,complemento,data_cadastro_endereco,id_cidade_endereco)" +
-                  "values (@logradouro,@numero,@bairro,@cep,@complemento,@data_cadastro_endereco,@id_cidade_endereco)";
-
-                SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-                commandInsert.Parameters.Add(new SqlParameter("@logradouro", endereco.Logradouro));
-                commandInsert.Parameters.Add(new SqlParameter("@numero", endereco.Numero));
-                commandInsert.Parameters.Add(new SqlParameter("@bairro", endereco.Bairro));
-                commandInsert.Parameters.Add(new SqlParameter("@cep", endereco.CEP));
-                commandInsert.Parameters.Add(new SqlParameter("@complemento", endereco.Complemento));
-                commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_endereco", endereco.Data_Cadastro_Endereco));
-                commandInsert.Parameters.Add(new SqlParameter("@id_cidade_endereco",endereco.Cidade.Id));
-
-                commandInsert.ExecuteNonQuery();
-                status = true;
-            }
-            catch(Exception ex) 
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
-            finally
-            {
-               conn.Close();
-            }
-
-            
-            return status;
-
-            //conn.Close();
-        }
-        */
+       
 
         public int InserirEndereco(AddressModel endereco)
         {
@@ -184,32 +144,18 @@ namespace AndreTurismo.Services
 
         }
 
-        public bool AtualizarEndereco(AddressModel endereco)
+        public bool AtualizarEndereco(AddressModel endereco,string coluna, string valor)
         {
-            //conn.Open();
+            conn.Open();
 
             bool status = false;
             StringBuilder query = new StringBuilder();
-            query.Append("update city set logradouro = @logradouro,");
-            query.Append("            numero = @numero");  //where id_cidade = @id_cidade");
-            query.Append("            bairro = @bairro");
-            query.Append("            cep = @cep");
-            query.Append("            complemento = @complemento");
-            query.Append("            data_cadastro_endereco = @data_cadastro_endereco");
-            query.Append("            id_cidade_endereco = @id_cidade_endereco");
-            query.Append("            where id_endereco = @id_endereco");
+            query.Append("update address set " + coluna + " = " + valor);
+            query.Append("            where id_endereco = " + endereco.Id);
 
             try
             {
                 SqlCommand commandUpdate = new(query.ToString(), conn);
-                commandUpdate.Parameters.Add(new SqlParameter("@logradouro", endereco.Logradouro));
-                commandUpdate.Parameters.Add(new SqlParameter("@numero", endereco.Numero));
-                commandUpdate.Parameters.Add(new SqlParameter("@bairro", endereco.Bairro));
-                commandUpdate.Parameters.Add(new SqlParameter("@cep", endereco.CEP));
-                commandUpdate.Parameters.Add(new SqlParameter("@complemento", endereco.Complemento));
-                commandUpdate.Parameters.Add(new SqlParameter("@data_cadastro_endereco", endereco.Data_Cadastro_Endereco));
-                commandUpdate.Parameters.Add(new SqlParameter("@id_cidade_endereco", endereco.Cidade.Id));
-                commandUpdate.Parameters.Add(new SqlParameter("@id_endereco", endereco.Id));
 
                 commandUpdate.ExecuteNonQuery();
                 status = true;

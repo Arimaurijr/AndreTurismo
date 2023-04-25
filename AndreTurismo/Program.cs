@@ -147,7 +147,7 @@ internal class Program
 
         //Console.WriteLine(new TicketService().RetornarPassagem(1));
 
-       
+       /*
         List<PackageModel> pacotes = new List<PackageModel>();
 
 
@@ -158,6 +158,43 @@ internal class Program
             Console.WriteLine(pacote);
             Console.WriteLine("\n");
         }
-        
+       */
+       /*
+        AddressModel endereco = new AddressModel();
+
+        endereco = new AddressController().RetornarEnderecoPorID(1);
+
+        new AddressService().AtualizarEndereco(endereco,"id_cidade_endereco", "'3'");
+
+        string data = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+        new AddressService().AtualizarEndereco(endereco, "data_cadastro_endereco", "'" + data + "'");
+       */
+        CityModel cidade = new CityModel();
+        cidade = new CityController().RetornarCidadePorID(1);
+
+        new CityService().AtualizarCidade(cidade, "descricao", "'cidade atualizada'");
+
+        ClientModel cliente = new ClientModel();
+
+        cliente = new ClientController().RetornarClientePorID(1);
+
+        new ClientService().AtualizarCliente(cliente, "nome_cliente", "'Guilherme'");
+
+        HotelModel hotel = new HotelModel();
+
+        hotel = new HotelController().RetornarHotelPorID(1);
+
+        new HotelService().AtualizarHotel(hotel, "nome_hotel", "'Hotel 50 estrelas'");
+
+        TicketModel passagem = new TicketModel();
+        passagem = new TicketController().RetornarPassagemPorID(1);
+
+        new TicketService().AtualizarPassagem(passagem, "valor_passagem", "1000.10");
+
+        PackageModel pacote = new PackageModel();
+
+        pacote = new PackageService().RetornarPacote(3);
+
+        new PackageService().AtualizarPacote(pacote, "passagem_pacote", "77");
     }
 }

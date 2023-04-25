@@ -117,22 +117,18 @@ namespace AndreTurismo.Services
 
             return status;
         }
-        public bool AtualizarCliente(ClientModel cliente)
+        public bool AtualizarCliente(ClientModel cliente, string coluna, string valor)
         {
+            conn.Open();
+
             bool status = false;
             StringBuilder query = new StringBuilder();
-            query.Append("update client set nome_cliente = @nome_cliente,");
-            query.Append("                  telefone = @telefone,");
-            query.Append("                  data_cadastro_cliente = @data_cadastro_cliente");
-            query.Append("                  endereco_cliente = @endereco_cliente");
+            query.Append("update client set " + coluna + " = " + valor);
+            query.Append("            where id_cliente = " + cliente.Id);
 
             try
             {
                 SqlCommand commandUpdate = new(query.ToString(), conn);
-                commandUpdate.Parameters.Add(new SqlParameter("@nome_cliente", cliente.Nome));
-                commandUpdate.Parameters.Add(new SqlParameter("@telefone", cliente.Telefone));
-                commandUpdate.Parameters.Add(new SqlParameter("@data_cadastro_cliente", cliente.Data_Cadastro_Cliente));
-                commandUpdate.Parameters.Add(new SqlParameter("@endereco_cliente", cliente.Endereco));
 
                 commandUpdate.ExecuteNonQuery();
                 status = true;

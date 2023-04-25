@@ -19,35 +19,7 @@ namespace AndreTurismo.Services
             conn = new SqlConnection(strConn);
             //conn.Open();
         }
-        /*
-        public bool InserirCidade(CityModel city)
-        {
-            bool status = false;
-            try
-            {
-                string strInsert = "insert into city(descricao, data_cadastro_cidade) values (@descricao, @data_cadastro_cidade)";
-                SqlCommand commandInsert = new SqlCommand(strInsert, conn);
-
-                commandInsert.Parameters.Add(new SqlParameter("@descricao", city.Descricao));
-                commandInsert.Parameters.Add(new SqlParameter("@data_cadastro_cidade", city.Data_Cadastro_Cidade));
-
-                commandInsert.ExecuteNonQuery();
-                status = true;
-
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-
-            return status;
-        }
-        */
+        
         public int InserirCidade(CityModel city)
         {
             conn.Open();
@@ -126,25 +98,23 @@ namespace AndreTurismo.Services
             return status;
 
         }
-        public bool AtualizarCidade(CityModel cidade)
+        public bool AtualizarCidade(CityModel cidade, string coluna, string valor)
         {
-            bool status = false;
+            conn.Open();
 
+            bool status = false;
             StringBuilder query = new StringBuilder();
-            query.Append("update city set descricao = @descricao, data_cadastro_cidade = @data_de_cadastro_cidade where id_cidade = @id_cidade");
+            query.Append("update city set " + coluna + " = " + valor);
+            query.Append("            where id_cidade = " + cidade.Id);
 
             try
             {
                 SqlCommand commandUpdate = new(query.ToString(), conn);
-                commandUpdate.Parameters.Add(new SqlParameter("@desricao", cidade.Descricao));
-                commandUpdate.Parameters.Add(new SqlParameter("@data_cadastro_cidade", cidade.Data_Cadastro_Cidade));
-                commandUpdate.Parameters.Add(new SqlParameter("@id_cidade", cidade.Id));
 
                 commandUpdate.ExecuteNonQuery();
-
                 status = true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -152,7 +122,6 @@ namespace AndreTurismo.Services
             {
                 conn.Close();
             }
-
 
 
             return status;
