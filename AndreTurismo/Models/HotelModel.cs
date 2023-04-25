@@ -12,6 +12,7 @@ namespace AndreTurismo.Models
             "(nome_hotel, data_cadastro_hotel, valor_hotel, endereco_hotel)" +
       "values(@Nome,      @Data_Cadastro_Hotel,@Valor_Hotel,@Endereco);" + "select cast(scope_identity() as int);";
 
+        public readonly static string UPDATE = "update hotel set @coluna = '@valor' ";
 
         public int Id { get; set; }
         public string Nome { get; set; }

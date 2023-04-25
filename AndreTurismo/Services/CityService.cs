@@ -20,7 +20,6 @@ namespace AndreTurismo.Services
         public CityService()
         {
             Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
-
       
         }
 
@@ -60,6 +59,23 @@ namespace AndreTurismo.Services
                 dr.Close();
                 db.Close();
                 return cidade;
+        }
+        public bool AtualizarCidade(CityModel cidade, string coluna, string valor)
+        {
+            bool status = true;
+            
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                StringBuilder montagem_query = new StringBuilder();
+                montagem_query.Append(CityModel.UPDATE);
+                montagem_query.Replace("@coluna",coluna);
+                montagem_query.Replace("@valor", valor);
+
+                db.Execute(montagem_query.ToString(), cidade);
+            }
+
+            return status;
         }
        
     }

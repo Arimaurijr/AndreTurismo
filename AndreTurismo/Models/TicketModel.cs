@@ -13,6 +13,7 @@ namespace AndreTurismo.Models
         "(endereco_origem, endereco_destino, cliente_passagem, data_cadastro_passagem, valor_passagem)" +
         "values(@Origem,    @Destino,            @Cliente,        @Data,                  @Valor_Passagem)" + "select cast(scope_identity() as int);";
 
+        public readonly static string UPDATE = "update passagem set @coluna = '@valor' ";
 
         public int Id { get; set; } 
         public AddressModel Origem { get; set; }

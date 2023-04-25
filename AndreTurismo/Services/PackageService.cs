@@ -83,7 +83,65 @@ namespace AndreTurismo.Services
             return pacotes;
             
         }
-       
+        public bool AtualizarPacote(PackageModel pacote, string coluna, string valor)
+        {
+            bool status = true;
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                StringBuilder montagem_query = new StringBuilder();
+                montagem_query.Append(PackageModel.UPDATE);
+                montagem_query.Replace("@coluna", coluna);
+                montagem_query.Replace("@valor", valor);
+
+                db.Execute(montagem_query.ToString(), pacote);
+            }
+
+            return status;
+        }
+
+        public PackageModel RetornarPacote(int id_pacote)
+        {
+            StringBuilder sb = new StringBuilder();
+            PackageModel pacote = new PackageModel();
+
+            sb.Append("select id_pacote,");
+            sb.Append("       hotel_pacote,");
+            sb.Append("       passagem_pacote,");
+            sb.Append("       data_cadastro_pacote,");
+            sb.Append("       valor_pacote,");
+            sb.Append("       cliente_pacote");
+            sb.Append("       from package where id_pacote = " + id_pacote);
+
+
+            var db = new SqlConnection(Conn);
+            db.Open();
+
+            SqlCommand commandSelect = new(sb.ToString(), db);
+            IDataReader dr = commandSelect.ExecuteReader();
+
+             if(dr.Read())
+            {
+                
+
+                pacote.Id = (int)dr["id_pacote"];
+                int id_hotel = (int)dr["hotel_pacote"];
+                int id_passagem = (int)dr["passagem_pacote"];
+                int id_cliente = (int)dr["cliente_pacote"];
+                pacote.Hotel_Pacote = new HotelService().RetornarHotel(id_hotel);
+                pacote.Passagem_Pacote = new TicketService().RetornarPassagem(id_passagem);
+                pacote.Cliente_Pacote = new ClientService().RetornarCliente(id_cliente);
+
+                pacote.Valor_Pacote = (decimal)dr["valor_pacote"];
+                pacote.Data_Cadastro_Pacote = (DateTime)dr["data_cadastro_pacote"];
+
+            }
+
+            return pacote;
+
+        }
+
     }
     
 }

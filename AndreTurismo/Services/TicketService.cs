@@ -20,8 +20,6 @@ namespace AndreTurismo.Services
         public TicketService()
         {
             Conn = ConfigurationManager.ConnectionStrings["servicoturismo"].ConnectionString;
-
-
         }
 
         public TicketModel InserirPassagem(TicketModel passagem)
@@ -81,7 +79,24 @@ namespace AndreTurismo.Services
              }
 
               return passagem;
-            }
         }
-       
+        public bool AtualizarPassagem(TicketModel passagem, string coluna, string valor)
+        {
+            bool status = true;
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                StringBuilder montagem_query = new StringBuilder();
+                montagem_query.Append(TicketModel.UPDATE);
+                montagem_query.Replace("@coluna", coluna);
+                montagem_query.Replace("@valor", valor);
+
+                db.Execute(montagem_query.ToString(), passagem);
+            }
+
+            return status;
+        }
     }
+
+}

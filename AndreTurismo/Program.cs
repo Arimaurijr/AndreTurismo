@@ -384,5 +384,23 @@ internal class Program
         Console.WriteLine("TESTES DO TOSTRING()");
         //Console.WriteLine(endereco);
         Console.WriteLine(pacote);
+
+        cidade = new CityController().RetornarCidadePorID(1);
+        new CityService().AtualizarCidade(cidade, "descricao", "Cidade teste update");
+
+        endereco = new AddressController().RetornarEnderecoPorID(1);
+        new AddressService().AtualizarEndereco(endereco, "logradouro", "Endereco teste update");
+
+        cliente = new ClientController().RetornarClientePorID(1);
+        new ClientService().AtualizarCliente(cliente,"nome_cliente","Cliente teste update");
+
+        hotel = new HotelController().RetornarHotelPorId(1);
+        new HotelService().AtualizarHotel(hotel, "nome_hotel", "Hotel teste update");
+
+        passagem = new TicketController().RetornarPassagemPorID(1);
+        new TicketService().AtualizarPassagem(passagem, "cliente_passagem", "5");
+
+        pacote = new PackageService().RetornarPacote(3);
+        new PackageService().AtualizarPacote(pacote, "hotel_pacote", "2");
     }
 }

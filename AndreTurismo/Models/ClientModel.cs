@@ -12,6 +12,7 @@ namespace AndreTurismo.Models
             "insert into client(nome_cliente, telefone, endereco_cliente, data_cadastro_cliente)" +
                            "values(@Nome,     @Telefone, @Endereco,       @Data_Cadastro_Cliente);" + "select cast(scope_identity() as int);";
 
+        public readonly static string UPDATE = "update client set @coluna = '@valor' ";
 
         public int Id { get; set; }
         public string Nome { get; set; }

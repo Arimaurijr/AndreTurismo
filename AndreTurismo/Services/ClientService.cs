@@ -72,7 +72,24 @@ namespace AndreTurismo.Services
 
             return cliente;
         }
-       
+        public bool AtualizarCliente(ClientModel cliente, string coluna, string valor)
+        {
+            bool status = true;
+
+            using (var db = new SqlConnection(Conn))
+            {
+                db.Open();
+                StringBuilder montagem_query = new StringBuilder();
+                montagem_query.Append(ClientModel.UPDATE);
+                montagem_query.Replace("@coluna", coluna);
+                montagem_query.Replace("@valor", valor);
+
+                db.Execute(montagem_query.ToString(), cliente);
+            }
+
+            return status;
+        }
+
 
     }
 
